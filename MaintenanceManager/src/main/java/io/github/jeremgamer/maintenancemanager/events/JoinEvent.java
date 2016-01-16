@@ -34,7 +34,7 @@ public class JoinEvent implements Listener {
     	if (MaintenanceManager.getHandler().isOn()) 
     		player.sendMessage( MaintenanceManager.getInstance().getConfig().getString("loginMessage").replaceAll("&", "§") );
     	
-    	if (MaintenanceManager.isUpToDate()) {
+    	if (!MaintenanceManager.isUpToDate()) {
     		player.sendMessage("§c§lYour MaintenanceManager is outdated! \n§6§oGet the latest version here: §e§n" + MaintenanceManager.DOWNLOAD_ADDRESS);
     	}    	
     }
