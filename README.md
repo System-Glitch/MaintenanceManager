@@ -20,7 +20,7 @@ Features:
   * Full permissions supported.
   * Full texts customization.
   * You can choose the number of slots available during a maintenance.
-  * Manage your plugins in real-time without having to reload or restart the server with /maintenance [enable|disable] (plugin name). Disabled plugins stay disabled after restart or reload until you re-enable it.
+  * Manage your plugins in real-time without having to reload or restart the server with /maintenance (enable|disable) (plugin name). Disabled plugins stay disabled after restart or reload until you re-enable it.
   * Countdown in motd when a maintenance has a duration planned.
   * Aliases on /maintenance command. See the Commands section for further informations.
   * Backups on command. 
