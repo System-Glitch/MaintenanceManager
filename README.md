@@ -7,7 +7,7 @@ Current version: 2.0
 Features:
 
   * /maintenance command manages the maintenance time: /maintenance on|off
-  * Maintenance schedule. Schedule your maintenance time and advert players with /maintenance on [time before maintenance time] (Optionnal, in minutes)
+  * Maintenance schedule. Schedule your maintenance time and advert players with /maintenance on (time before maintenance time) (Optionnal, in minutes)
   * Schedule interruption with /maintenance cancel.
   * Define the duration of your maintenance with /maintenance on [time before maintenance time] <duration> (Optionnal, in minutes)
   * Kicks non-op players and players who don't have the permission to log-in during the maintenance.
