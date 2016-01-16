@@ -4,7 +4,7 @@ Maintenance Manager is the ultimate maintenance plugin which makes maintenances 
 
 Current version: 2.0
 
-Features:
+#Features:
 
   * /maintenance command manages the maintenance time: /maintenance on|off
   * Maintenance schedule. Schedule your maintenance time and advert players with /maintenance on (time before maintenance time) (Optionnal, in minutes)
@@ -25,7 +25,7 @@ Features:
   * Aliases on /maintenance command. See the Commands section for further informations.
   * Backups on command. 
 
-Commands:
+#Commands:
 
 /maintenance is the main command. You'll have to add the following arguments:
 
@@ -41,7 +41,7 @@ Aliases: /mmode , /maint
   * disable <plugin name>: disable the selected plugin. Note: If you are not sure about the plugin name, type /plugins.
   * backup: Saves the server folder into a zip file located in the "backups" folder. 
 
-Permissions:
+#Permissions:
 
 maintenance.*: Give acces to all MaintenanceManager commands.
 
@@ -189,7 +189,7 @@ Setup:
 
 To set up Maintenance Manager, simply download the jar file and put it into "plugins" folder. And now enjoy the uniqueness of MaintenanceManager!
 
-Feedback:
+#Feedback:
 
 Your opinion is important for me! Please write a comment below and let me know what you think, what you would like to see in the plugin or what you would like to change! Please report me any bug you have. :) I want to make the best maintenance plugin for Bukkit, and to do that, I need your feedback! Thank you for your time.
 Donate!
