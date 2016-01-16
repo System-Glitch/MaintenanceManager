@@ -1,0 +1,57 @@
+name: MaintenanceManager
+main: io.github.jeremgamer.maintenancemanager.MaintenanceManager
+version: 2.0
+commands:
+   maintenance:
+      description: All commands from MaintenanceManager
+      aliases: [mmode, maint]
+      usage: /maintenance [on|off|cancel|reload|enable|disable|backup] [schedule in minutes|plugin name] [duration in minutes]
+      permission: maintenance.*
+      permission-message: You are not allowed to do that.
+   cpu:
+      description: Returns the current CPU usage in percent.
+      usage: /cpu
+      permission: maintenance.cpu
+      permission-message: You are not allowed to do that.
+   ram:
+      description: Returns the current RAM usage in percent.
+      usage: /ram
+      permission: maintenance.ram
+      permission-message: You are not allowed to do that.
+
+permissions:
+  maintenance.*:
+    description: Give access to all MaintenanceManager commands.
+    children:
+      maintenance.maintenance: true
+      maintenance.maintenance.cancel: true
+      maintenance.backup: true
+      maintenance.access: true
+      maintenance.reload: true
+      maintenance.manage.plugins: true
+      maintenance.cpu: true
+      maintenance.ram: true
+  maintenance.maintenance:
+     description: Allows to start or stop a maintenance.
+     default: op
+  maintenance.maintenance.cancel:
+     description: Allows to cancel a scheduled maintenance.
+     default: op
+  maintenance.backup:
+     description: Allows to use /maintenance backup command.
+     default: op
+  maintenance.access:
+     description: Allows to enter the server while maintenance mode is on (and don't be kicked when it begins)
+     default: op
+  maintenance.reload:
+     description: Allows to reload the config file.
+     default: op
+  maintenance.manage.plugins:
+     description: Allows to disable or enable plugins.
+     default: op
+  maintenance.cpu:
+     description: Allows to perform /cpu command.
+     default: op
+  maintenance.ram:
+     description: Allows to perform /ram command.
+     default: op
