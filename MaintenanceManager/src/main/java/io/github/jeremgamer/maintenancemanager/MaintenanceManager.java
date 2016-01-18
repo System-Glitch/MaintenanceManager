@@ -21,7 +21,7 @@ import io.github.jeremgamer.maintenancemanager.events.ListPingEvent;
 public class MaintenanceManager extends JavaPlugin {
 
 	public static final String VERSION = "2.0.1";
-	public static final String DOWNLOAD_ADDRESS = "https://goo.gl/hrBLbn";
+	public static final String DOWNLOAD_ADDRESS = "goo.gl/8Tojtm";
 	private static final String RELEASE_MANIFEST = "https://github.com/JeremGamer/MaintenanceManager/blob/master/RELEASE_MANIFEST.version";
 	private static MaintenanceManager instance;
 	private static Handler handler;
