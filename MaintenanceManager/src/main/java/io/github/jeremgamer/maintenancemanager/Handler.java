@@ -76,112 +76,122 @@ public class Handler {
 	}
 
 	public void normalMaintenance(CommandSender sender) {
-		if (!scheduleEnabled) {
-			maintenanceTime = true;
-			MaintenanceManager.getInstance().getConfig().set("maintenanceModeOnStart", true);	 
-			MaintenanceManager.getInstance().saveConfig();
-			Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceStart").replaceAll("&", "§") );
-			Bukkit.getScheduler().runTask(MaintenanceManager.getInstance(), new Runnable() {
-				@Override
-				public void run() {
-					for (Player player: Bukkit.getServer().getOnlinePlayers())
-						if ( !player.hasPermission( "maintenance.access" ) || !player.isOp() ) 
-							player.kickPlayer( MaintenanceManager.getInstance().getConfig().getString("kickMessage").replaceAll("&", "§") );
-				}
+		if(!maintenanceTime) {
+			if (!scheduleEnabled) {
+				maintenanceTime = true;
+				MaintenanceManager.getInstance().getConfig().set("maintenanceModeOnStart", true);	 
+				MaintenanceManager.getInstance().saveConfig();
+				Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceStart").replaceAll("&", "§") );
+				Bukkit.getScheduler().runTask(MaintenanceManager.getInstance(), new Runnable() {
+					@Override
+					public void run() {
+						for (Player player: Bukkit.getServer().getOnlinePlayers())
+							if ( !player.hasPermission( "maintenance.access" ) && !player.isOp() ) 
+								player.kickPlayer( MaintenanceManager.getInstance().getConfig().getString("kickMessage").replaceAll("&", "§") );
+					}
 
-			});
+				});
+			} else
+				sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyScheduled").replaceAll("&", "§") );
 		} else
-			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyScheduled").replaceAll("&", "§") );
+			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyLaunched").replaceAll("&", "§") );
 	}
 
 	public void normalMaintenance() {
-		if (!scheduleEnabled) {
-			maintenanceTime = true;
-			MaintenanceManager.getInstance().getConfig().set("maintenanceModeOnStart", true);	 
-			MaintenanceManager.getInstance().saveConfig();
-			Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceStart").replaceAll("&", "§") );
-			Bukkit.getScheduler().runTask(MaintenanceManager.getInstance(), new Runnable() {
-				@Override
-				public void run() {
-					for (Player player: Bukkit.getServer().getOnlinePlayers())
-						if ( !player.hasPermission( "maintenance.access" ) || !player.isOp() ) 
-							player.kickPlayer( MaintenanceManager.getInstance().getConfig().getString("kickMessage").replaceAll("&", "§") );
-				}
+		if(!maintenanceTime)
+			if (!scheduleEnabled) {
+				maintenanceTime = true;
+				MaintenanceManager.getInstance().getConfig().set("maintenanceModeOnStart", true);	 
+				MaintenanceManager.getInstance().saveConfig();
+				Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceStart").replaceAll("&", "§") );
+				Bukkit.getScheduler().runTask(MaintenanceManager.getInstance(), new Runnable() {
+					@Override
+					public void run() {
+						for (Player player: Bukkit.getServer().getOnlinePlayers())
+							if ( !player.hasPermission( "maintenance.access" ) && !player.isOp() ) 
+								player.kickPlayer( MaintenanceManager.getInstance().getConfig().getString("kickMessage").replaceAll("&", "§") );
+					}
 
-			});
-		}
+				});
+			}
 	}
 
 	@SuppressWarnings("deprecation")
 	public void scheduledMaintenance(CommandSender sender , final int scheduleTime) {
-		if (!scheduleEnabled) {
-			if(scheduleTime <= 0) {
-				normalMaintenance();
-				return;
-			}
-			Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(scheduleTime))) );
-			setScheduleTime(scheduleTime*60);
-			scheduleEnabled = true;
-			scheduleTask = Bukkit.getScheduler().scheduleAsyncRepeatingTask(MaintenanceManager.getInstance(), new Runnable() {
-
-				@Override
-				public void run() {
-					decrementSchedule();
-
-					if(getScheduleTime() <= 0) {
-						scheduleEnabled = false;
-						Bukkit.getScheduler().cancelTask(scheduleTask);
-						normalMaintenance();
-					} else if(getScheduleTime() == 60)
-						Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleLessThanOneMinute").replaceAll("&", "§") );
-					else if(((getScheduleTime() == 60*2 && scheduleTime > 2) ||
-							(getScheduleTime() == 60*3 && scheduleTime > 3) ||
-							(getScheduleTime() == 60*4 && scheduleTime > 4) ||
-							(getScheduleTime() == 60*5 && scheduleTime > 5)))
-						Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
-					else if(getScheduleTime() == (scheduleTime*60 / 2) && getScheduleTime() > 60)
-						Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
+		if(!maintenanceTime) {
+			if (!scheduleEnabled) {
+				if(scheduleTime <= 0) {
+					normalMaintenance();
+					return;
 				}
+				Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(scheduleTime))) );
+				setScheduleTime(scheduleTime*60);
+				scheduleEnabled = true;
+				scheduleTask = Bukkit.getScheduler().scheduleAsyncRepeatingTask(MaintenanceManager.getInstance(), new Runnable() {
 
-			}, 0L , 20L);
+					@Override
+					public void run() {
+						decrementSchedule();
+
+						if(getScheduleTime() <= 0) {
+							scheduleEnabled = false;
+							Bukkit.getScheduler().cancelTask(scheduleTask);
+							normalMaintenance();
+						} else if(getScheduleTime() == 60)
+							Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleLessThanOneMinute").replaceAll("&", "§") );
+						else if(((getScheduleTime() == 60*2 && scheduleTime > 2) ||
+								(getScheduleTime() == 60*3 && scheduleTime > 3) ||
+								(getScheduleTime() == 60*4 && scheduleTime > 4) ||
+								(getScheduleTime() == 60*5 && scheduleTime > 5)))
+							Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
+						else if(getScheduleTime() == (scheduleTime*60 / 2) && getScheduleTime() > 60)
+							Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
+					}
+
+				}, 0L , 20L);
+			} else
+				sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyScheduled").replaceAll("&", "§") );
 		} else
-			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyScheduled").replaceAll("&", "§") );
+			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyLaunched").replaceAll("&", "§") );
 	}
 
 	@SuppressWarnings("deprecation")
 	public void scheduledMaintenance(CommandSender sender , final int scheduleTime , final int duration) {
-		if (!scheduleEnabled) {
-			if(scheduleTime <= 0) {
-				maintenanceWithDuration(duration);
-				return;
-			}
-			Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(scheduleTime))) );
-			setScheduleTime(scheduleTime*60);
-			scheduleEnabled = true;
-			scheduleTask = Bukkit.getScheduler().scheduleAsyncRepeatingTask(MaintenanceManager.getInstance(), new Runnable() {
-
-				@Override
-				public void run() {
-					decrementSchedule();
-
-					if(getScheduleTime() <= 0) {
-						scheduleEnabled = false;
-						Bukkit.getScheduler().cancelTask(scheduleTask);
-						maintenanceWithDuration(duration);
-					} else if(getScheduleTime() == 60)
-						Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleLessThanOneMinute").replaceAll("&", "§") );
-					else if(((getScheduleTime() == 60*2 && scheduleTime > 2) ||
-							(getScheduleTime() == 60*3 && scheduleTime > 3) ||
-							(getScheduleTime() == 60*4 && scheduleTime > 4) ||
-							(getScheduleTime() == 60*5 && scheduleTime > 5)))
-						Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
-					else if(getScheduleTime() == (scheduleTime*60 / 2) && getScheduleTime() > 60)
-						Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
+		if(!maintenanceTime) {
+			if (!scheduleEnabled) {
+				if(scheduleTime <= 0) {
+					maintenanceWithDuration(duration);
+					return;
 				}
+				Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(scheduleTime))) );
+				setScheduleTime(scheduleTime*60);
+				scheduleEnabled = true;
+				scheduleTask = Bukkit.getScheduler().scheduleAsyncRepeatingTask(MaintenanceManager.getInstance(), new Runnable() {
 
-			}, 0L , 20L);
+					@Override
+					public void run() {
+						decrementSchedule();
+
+						if(getScheduleTime() <= 0) {
+							scheduleEnabled = false;
+							Bukkit.getScheduler().cancelTask(scheduleTask);
+							maintenanceWithDuration(duration);
+						} else if(getScheduleTime() == 60)
+							Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleLessThanOneMinute").replaceAll("&", "§") );
+						else if(((getScheduleTime() == 60*2 && scheduleTime > 2) ||
+								(getScheduleTime() == 60*3 && scheduleTime > 3) ||
+								(getScheduleTime() == 60*4 && scheduleTime > 4) ||
+								(getScheduleTime() == 60*5 && scheduleTime > 5)))
+							Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
+						else if(getScheduleTime() == (scheduleTime*60 / 2) && getScheduleTime() > 60)
+							Bukkit.getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("scheduleMessage").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(getScheduleTime()/60))) );
+					}
+
+				}, 0L , 20L);
+			} else
+				sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyScheduled").replaceAll("&", "§") );
 		} else
-			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyScheduled").replaceAll("&", "§") );
+			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("maintenanceAlreadyLaunched").replaceAll("&", "§") );
 	}
 
 	@SuppressWarnings("deprecation")

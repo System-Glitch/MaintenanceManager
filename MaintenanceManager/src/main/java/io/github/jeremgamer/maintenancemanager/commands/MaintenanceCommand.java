@@ -40,11 +40,12 @@ public class MaintenanceCommand implements CommandExecutor {
 			sender.sendMessage(help);
 			return true;
 		}
-		if (args[0].equalsIgnoreCase( "reload" ) && sender.hasPermission( "maintenance.reload")) {
+		if (args[0].equalsIgnoreCase( "reload" ) && sender.hasPermission("maintenance.reload")) {
+			sender.sendMessage( "§2§oReloading..." );
 			MaintenanceManager.getInstance().reload();
 			sender.sendMessage( "§2§oMaintenanceManager config reloaded!" );
 			return true;
-		} else if (args[0].equalsIgnoreCase( "on" ) && sender.hasPermission( "maintenance.maintenance")) {	
+		} else if (args[0].equalsIgnoreCase( "on" ) && sender.hasPermission("maintenance.maintenance")) {	
 
 			if ( args.length == 1 )
 				MaintenanceManager.getHandler().normalMaintenance(sender);	
@@ -93,14 +94,13 @@ public class MaintenanceCommand implements CommandExecutor {
 			else
 				sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("pluginManagementArgumentErrorEnable").replaceAll("&", "§") );
 			return true;
-		} else if (args[0].equalsIgnoreCase( "cancel" ) && sender.hasPermission( "mainteance.maintenance.cancel" ) && args.length == 1) {
+		} else if (args[0].equalsIgnoreCase( "cancel" ) && sender.hasPermission( "maintenance.maintenance.cancel" ) && args.length == 1) {
 			MaintenanceManager.getHandler().cancelSchedule(sender);
 			return true;
 		} else if (args[0].equalsIgnoreCase( "backup" ) && sender.hasPermission( "maintenance.backup" )) {
 			MaintenanceUtils.backup(sender);
 			return true;
 		}
-		sender.sendMessage(help);
 		return true;
 	}
 
