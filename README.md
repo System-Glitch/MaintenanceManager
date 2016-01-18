@@ -4,7 +4,7 @@ Maintenance Manager is the ultimate maintenance plugin which makes maintenances 
 
 Current version: 2.0
 
----> [Download](https://app.box.com/s/mi19fcbpta2p19islpuo3qtewmzdvyh3) <---
+---> [Download](https://app.box.com/s/jcovi9h8wb02i1eztdo0ge1zhu2khpy5) <---
 
 #Features:
 
