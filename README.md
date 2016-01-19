@@ -34,42 +34,44 @@ Current version: 2.0.1
 
 Aliases: /mmode , /maint
 
-  * on: turn on the maintenance mode
-    * <schedule in minutes> (optionnal) Note: The schedule would cancel if you reload the server before the maintenance begin.
-      * <duration of the maintenance in minutes> (optionnal) 
-  * cancel: cancels a scheduled maintenance.
-  * off: turn off the maintenance mode
-  * reload: reload the plugin's config file
-  * enable <plugin name>: enable the selected plugin.
-  * disable <plugin name>: disable the selected plugin. Note: If you are not sure about the plugin name, type /plugins.
-  * backup: Saves the server folder into a zip file located in the "backups" folder. 
+  * **on** : turn on the maintenance mode
+    * schedule in minutes (optionnal) Note: The schedule would cancel if you reload the server before the maintenance begin.
+      * duration of the maintenance in minutes (optionnal) 
+  * **cancel** : cancels a scheduled maintenance.
+  * **off** : turn off the maintenance mode
+  * **reload** : reload the plugin's config file
+  * **enable (plugin name)** : enable the selected plugin.
+  * **disable (plugin name)** : disable the selected plugin. Note: If you are not sure about the plugin name, type /plugins.
+  * **backup** : Saves the server folder into a zip file located in the "backups" folder. 
   
-  * /cpu : displays the current cpu usage in percentage.
-  * /ram : displays the current ram usage in percentage and in Mb
+  * **/cpu** : displays the current cpu usage in percentage.
+  * **/ram** : displays the current ram usage in percentage and in Mb
  
   
 #Permissions:
 
-maintenance.*: Give acces to all MaintenanceManager commands.
+**maintenance.*** : Give acces to all MaintenanceManager commands.
 
-maintenance.maintenance: Allows to start or stop a maintenance.
+**maintenance.maintenance** : Allows to start or stop a maintenance.
 
-maintenance.maintenance.cancel: Allows to cancel a scheduled maintenance.
+**maintenance.maintenance.cancel**: Allows to cancel a scheduled maintenance.
 
-maintenance.backup: Allows to use the /maintenance backup command.
+**maintenance.backup** : Allows to use the /maintenance backup command.
 
-maintenance.access: Allows to enter the server during maintenance mode (and don't be kicked when the maintenance begin)
+**maintenance.access** : Allows to enter the server during maintenance mode (and don't be kicked when the maintenance begin)
 
-maintenance.reload: Allows to reload the config file.
+**maintenance.reload** : Allows to reload the config file.
 
-maintenance.manage.plugins: Allows to disable or enable plugins.
+**maintenance.manage.plugins** : Allows to disable or enable plugins.
 
-maintenance.cpu : Allows to use the /cpu command.
+**maintenance.cpu** : Allows to use the /cpu command.
 
-maintenance.ram : Allows to use the /ram command.
+**maintenance.ram** : Allows to use the /ram command.
 
 Of course, OP players have these permissions.
-Configuration:
+
+
+#Configuration:
 
 By default, the config file looks like this:
 
@@ -191,12 +193,14 @@ pluginManagementArgumentErrorEnable: '&cPlease name the plugin you want to enabl
 
 To set your custom icon for maintenances, just put an image named maintenance-icon.png in the main folder of your server. The default one auto-creates if the plugins doesn't find any maintenance-icon.png in that folder. Note: Your icon must be a 64X64 png image!
 
-Advice: If you don't want to change the icon, copy-paste server-icon.png and rename it into maintenance-icon.png
+*Advice: If you don't want to change the icon, copy-paste server-icon.png and rename it into maintenance-icon.png*
 
 Important: If your server is running without icon, maintenance-icon.png will be displayed even out of a maintenance!
 
-To add colors to your texts, just put '§' and a character from 0-9 and a-f before the words you want to color. Please refer you to this page to know formatting codes.
-Setup:
+To add colors to your texts, just put '§' and a character from 0-9 and a-f before the words you want to color. Please refer you to [this page](http://minecraft.gamepedia.com/Formatting_codes) to know formatting codes.
+
+
+#Setup:
 
 To set up Maintenance Manager, simply download the jar file and put it into "plugins" folder. And now enjoy the uniqueness of MaintenanceManager!
 
