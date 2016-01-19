@@ -26,6 +26,7 @@ Current version: 2.0.1
   * Countdown in motd when a maintenance has a duration planned.
   * Aliases on /maintenance command. See the Commands section for further informations.
   * Backups on command. 
+  * Check the CPU and RAM usage at any time with /cpu and /ram
 
 #Commands:
 
@@ -42,7 +43,11 @@ Aliases: /mmode , /maint
   * enable <plugin name>: enable the selected plugin.
   * disable <plugin name>: disable the selected plugin. Note: If you are not sure about the plugin name, type /plugins.
   * backup: Saves the server folder into a zip file located in the "backups" folder. 
-
+  
+  * /cpu : displays the current cpu usage in percentage.
+  * /ram : displays the current ram usage in percentage and in Mb
+ 
+  
 #Permissions:
 
 maintenance.*: Give acces to all MaintenanceManager commands.
@@ -58,6 +63,10 @@ maintenance.access: Allows to enter the server during maintenance mode (and don'
 maintenance.reload: Allows to reload the config file.
 
 maintenance.manage.plugins: Allows to disable or enable plugins.
+
+maintenance.cpu : Allows to use the /cpu command.
+
+maintenance.ram : Allows to use the /ram command.
 
 Of course, OP players have these permissions.
 Configuration:
