@@ -20,7 +20,7 @@ public class RamCommand implements CommandExecutor {
 				@Override
 				public void run() {
 					try {
-						sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("ramUsage").replaceAll("&", "§").replaceAll("<ram%>", String.valueOf(MaintenanceUtils.getMemUsagePercent())).replaceAll("<ram>", String.valueOf(MaintenanceUtils.getMemUsage())));
+						sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("ramUsage").replaceAll("&", "§").replaceAll("<ram%>", String.valueOf(MaintenanceUtils.getMemUsagePercent())).replaceAll("<ram>", String.valueOf(MaintenanceUtils.getMemUsage())));
 					} catch (SigarException e) {
 						e.printStackTrace();
 					}

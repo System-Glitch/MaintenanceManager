@@ -2,6 +2,7 @@ package io.github.jeremgamer.maintenancemanager;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +21,7 @@ import io.github.jeremgamer.maintenancemanager.events.ListPingEvent;
 
 public class MaintenanceManager extends JavaPlugin {
 
-	public static final String VERSION = "2.0.1";
+	public static final String VERSION = "2.1";
 	public static final String DOWNLOAD_ADDRESS = "goo.gl/8Tojtm";
 	private static final String RELEASE_MANIFEST = "https://github.com/JeremGamer/MaintenanceManager/blob/master/RELEASE_MANIFEST.version";
 	private static MaintenanceManager instance;
@@ -30,6 +31,9 @@ public class MaintenanceManager extends JavaPlugin {
 
 	private ListPingEvent listPing;
 	private MaintenanceCommand command;
+
+	private SaveFile config;
+	private File configFile;
 
 	@SuppressWarnings("deprecation")
 	private boolean checkUpdate () {		
@@ -41,10 +45,10 @@ public class MaintenanceManager extends JavaPlugin {
 			String s;
 
 			URL u = new URL(RELEASE_MANIFEST);
-			
+
 			InputStream is;
 			try {
-			is = u.openStream();
+				is = u.openStream();
 			} catch (FileNotFoundException fnfe) {
 				return true;
 			}
@@ -101,6 +105,7 @@ public class MaintenanceManager extends JavaPlugin {
 	@SuppressWarnings("static-access")
 	public void onEnable() {
 		this.instance = this;
+		initConfig();
 		this.handler = new Handler();
 		upToDate = checkUpdate();
 		initEvents();
@@ -138,6 +143,56 @@ public class MaintenanceManager extends JavaPlugin {
 		for(Player p : Bukkit.getOnlinePlayers())
 			if (!isUpToDate() && p.isOp())
 				p.sendMessage("§c§lYour MaintenanceManager is outdated! \n§6§oGet the latest version here: §e§n" + DOWNLOAD_ADDRESS);
+	}
+
+	private void initConfig() {
+		config = new SaveFile();
+		configFile = new File(MaintenanceManager.getInstance().getDataFolder(), "config.yml");
+		if (!configFile.exists())
+			MaintenanceManager.getInstance().saveDefaultConfig();
+		try {
+			config.load(configFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		updateConfig();
+	}
+	
+	private void updateConfig() {
+		if(!config.containsSection("scheduleMessageSeconds")) {
+			config.createSection(config.indexOf("scheduleMessage")+1 , "scheduleMessageSeconds", "&5&oMaintenance in &4&l<seconds> &5&oseconds!");
+			try {
+				config.save(configFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void reloadConfig() {
+		try {
+			if (!configFile.exists())
+				config.save(configFile);
+			else
+				config.load(configFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public SaveFile getCustomConfig() {
+		return config;
+	}
+
+	@Override
+	public void saveConfig() {
+		try {
+			config.save(configFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

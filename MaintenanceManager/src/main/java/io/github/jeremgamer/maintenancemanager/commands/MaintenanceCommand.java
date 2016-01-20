@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import io.github.jeremgamer.maintenancemanager.MaintenanceManager;
 import io.github.jeremgamer.maintenancemanager.MaintenanceUtils;
@@ -36,12 +37,13 @@ public class MaintenanceCommand implements CommandExecutor {
 	}
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(args.length == 0) {
+		if(args.length == 0 || args.length > 3) {
 			sender.sendMessage(help);
 			return true;
 		}
 		if (args[0].equalsIgnoreCase( "reload" ) && sender.hasPermission("maintenance.reload")) {
-			sender.sendMessage( "§2§oReloading..." );
+			if(sender instanceof Player)
+				sender.sendMessage( "§2§oReloading..." );
 			MaintenanceManager.getInstance().reload();
 			sender.sendMessage( "§2§oMaintenanceManager config reloaded!" );
 			return true;
@@ -55,7 +57,7 @@ public class MaintenanceCommand implements CommandExecutor {
 					int scheduleTime = Integer.parseInt(args[1]);
 					MaintenanceManager.getHandler().scheduledMaintenance(sender, scheduleTime);
 				} catch (NumberFormatException e){
-					sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("inputErrorSchedule").replaceAll("&", "§") );
+					sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("inputErrorSchedule").replaceAll("&", "§") );
 					return true;
 				}
 
@@ -64,14 +66,14 @@ public class MaintenanceCommand implements CommandExecutor {
 				try {
 					scheduleTime = Integer.parseInt(args[1]);
 				} catch (NumberFormatException e){
-					sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("inputErrorSchedule").replaceAll("&", "§") );
+					sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("inputErrorSchedule").replaceAll("&", "§") );
 					return true;
 				}
 				int duration;
 				try {
 					duration = Integer.parseInt(args[2]);
 				} catch (NumberFormatException e){
-					sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("inputErrorDuration").replaceAll("&", "§") );
+					sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("inputErrorDuration").replaceAll("&", "§") );
 					return true;
 				}
 				MaintenanceManager.getHandler().scheduledMaintenance(sender, scheduleTime, duration);
@@ -86,13 +88,13 @@ public class MaintenanceCommand implements CommandExecutor {
 			if (args.length == 2) 
 				MaintenanceUtils.disablePlugin(sender, args[1]);
 			else
-				sender.sendMessage(MaintenanceManager.getInstance(). getConfig().getString("pluginManagementArgumentErrorDisable").replaceAll("&", "§") );
+				sender.sendMessage(MaintenanceManager.getInstance(). getCustomConfig().getString("pluginManagementArgumentErrorDisable").replaceAll("&", "§") );
 			return true;
 		} else if (args[0].equalsIgnoreCase( "enable" ) && sender.hasPermission( "maintenance.manage.plugins")) {
 			if (args.length == 2)
 				MaintenanceUtils.enablePlugin(sender, args[1]);
 			else
-				sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("pluginManagementArgumentErrorEnable").replaceAll("&", "§") );
+				sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("pluginManagementArgumentErrorEnable").replaceAll("&", "§") );
 			return true;
 		} else if (args[0].equalsIgnoreCase( "cancel" ) && sender.hasPermission( "maintenance.maintenance.cancel" ) && args.length == 1) {
 			MaintenanceManager.getHandler().cancelSchedule(sender);
@@ -100,7 +102,8 @@ public class MaintenanceCommand implements CommandExecutor {
 		} else if (args[0].equalsIgnoreCase( "backup" ) && sender.hasPermission( "maintenance.backup" )) {
 			MaintenanceUtils.backup(sender);
 			return true;
-		}
+		} else
+			sender.sendMessage(help);
 		return true;
 	}
 

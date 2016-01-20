@@ -69,11 +69,11 @@ public abstract class MaintenanceUtils {
 			Plugin plugin = getPluginIgnoreCase(toEnable);
 			Bukkit.getPluginManager().enablePlugin(plugin);
 			disabledPlugins.remove(plugin.getName());
-			MaintenanceManager.getInstance().getConfig().set("disabledPlugins", disabledPlugins);            	 
+			MaintenanceManager.getInstance().getCustomConfig().set("disabledPlugins", disabledPlugins);            	 
 			MaintenanceManager.getInstance().saveConfig();
-			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("pluginEnabled").replaceAll("&", "§").replaceAll("<plugin>", plugin.getName()) );
+			sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("pluginEnabled").replaceAll("&", "§").replaceAll("<plugin>", plugin.getName()) );
 		} catch (NullPointerException e1) {
-			sender.sendMessage(MaintenanceManager.getInstance().getConfig().getString("pluginManagementArgumentErrorEnable").replaceAll("&", "§"));
+			sender.sendMessage(MaintenanceManager.getInstance().getCustomConfig().getString("pluginManagementArgumentErrorEnable").replaceAll("&", "§"));
 		}
 	}
 
@@ -82,11 +82,11 @@ public abstract class MaintenanceUtils {
 			Plugin plugin = getPluginIgnoreCase(toDisable);
 			Bukkit.getPluginManager().disablePlugin(plugin);
 			disabledPlugins.add(plugin.getName());
-			MaintenanceManager.getInstance().getConfig().set("disabledPlugins", disabledPlugins);            	 
+			MaintenanceManager.getInstance().getCustomConfig().set("disabledPlugins", disabledPlugins);            	 
 			MaintenanceManager.getInstance().saveConfig();
-			sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("pluginDisabled").replaceAll("&", "§").replaceAll("<plugin>", plugin.getName()) );
+			sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("pluginDisabled").replaceAll("&", "§").replaceAll("<plugin>", plugin.getName()) );
 		} catch (NullPointerException e1) {
-			sender.sendMessage(MaintenanceManager.getInstance().getConfig().getString("pluginManagementArgumentErrorDisable").replaceAll("&", "§"));
+			sender.sendMessage(MaintenanceManager.getInstance().getCustomConfig().getString("pluginManagementArgumentErrorDisable").replaceAll("&", "§"));
 		}
 	}
 
@@ -102,7 +102,7 @@ public abstract class MaintenanceUtils {
 					MaintenanceManager.getInstance().getLogger().warning("Failed to create backup folder...");
 			}
 
-			MaintenanceManager.getInstance().getServer().broadcastMessage( MaintenanceManager.getInstance().getConfig().getString("backingUpMessage").replaceAll("&", "§") );
+			MaintenanceManager.getInstance().getServer().broadcastMessage( MaintenanceManager.getInstance().getCustomConfig().getString("backingUpMessage").replaceAll("&", "§") );
 			MaintenanceManager.getInstance().getLogger().info("Backing up...");
 
 
@@ -111,13 +111,13 @@ public abstract class MaintenanceUtils {
 
 			backupProcess();
 			if(sender != null)
-				sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("backupSuccess").replaceAll("&", "§") );
+				sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("backupSuccess").replaceAll("&", "§") );
 
 			MaintenanceManager.getInstance().getServer().dispatchCommand(MaintenanceManager.getInstance().getServer().getConsoleSender(), "save-on");
 			backingUp = false;
 		} else {
 			if(sender != null)
-				sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("alreadyBackingUp").replaceAll("&", "§") );
+				sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("alreadyBackingUp").replaceAll("&", "§") );
 		}
 	}
 

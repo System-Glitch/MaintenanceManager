@@ -46,10 +46,11 @@ maintenanceWithDurationMOTDLessThanOneMinute: '&6&o&lMaintenance mode...<n>&2Les
 #----------------------#
 scheduleMessage: '&5&oMaintenance in &4&l<minutes> &5&ominutes!'
 
+scheduleMessageSeconds: '&5&oMaintenance in &4&l<seconds> &5&oseconds!'
+
 scheduleCanceled: '&a&oThe scheduled maintenance have been canceled!'
 
 scheduleLessThanOneMinute: '&5&oMaintenance in less than one minute!'
-
 
 #----------------------------------------------------# 
 #----------------------------------------------------# 
@@ -111,7 +112,3 @@ pluginManagementArgumentErrorEnable: '&cPlease name the plugin you want to enabl
 
 #----------------------------------------------------# 
 #----------------------------------------------------# 
-
-
-
-

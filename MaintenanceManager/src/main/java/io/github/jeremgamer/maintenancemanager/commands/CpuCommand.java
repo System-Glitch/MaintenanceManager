@@ -20,7 +20,7 @@ public class CpuCommand implements CommandExecutor {
 				@Override
 				public void run() {
 					try {
-						sender.sendMessage( MaintenanceManager.getInstance().getConfig().getString("cpuUsage").replaceAll("&", "§").replaceAll("<cpu>", String.valueOf(MaintenanceUtils.getCpuUsage())));
+						sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("cpuUsage").replaceAll("&", "§").replaceAll("<cpu>", String.valueOf(MaintenanceUtils.getCpuUsage())));
 					} catch (SigarException e) {
 						e.printStackTrace();
 					}
