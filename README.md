@@ -148,7 +148,7 @@ pluginEnabled: '&6&l<plugin> &a&osuccessfully enabled!'
 #----------------------# 
 #Backup related        #
 #----------------------#
-backingUpMessage: '&e&oBacking up. The server will lag brievely.'
+backingUpMessage: '&e&oBacking up. The server will lag briefly.'
 
 backupSuccess: '&2&o&lBackup success!'
 
