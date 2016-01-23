@@ -108,12 +108,9 @@ ramUsage: '&3RAM usage : &2&l<ram%>% || <ram> MB'
 #----------------------#
 maintenanceMOTD: '&6&o&lMaintenance mode...'
 
-maintenanceWithDurationMOTD: '&6&o&lMaintenance mode...<n>&2&l<minutes> &r&eminutes
-  remaining!'
+maintenanceWithDurationMOTD: '&6&o&lMaintenance mode...<n>&2&l<minutes> &r&eminutes remaining!'
 
-maintenanceWithDurationMOTDLessThanOneMinute: '&6&o&lMaintenance mode...<n>&2Less
-  than one minute remaining!'
-
+maintenanceWithDurationMOTDLessThanOneMinute: '&6&o&lMaintenance mode...<n>&2Less than one minute remaining!'
 
 #----------------------------------------------------# 
 #----------------------------------------------------# 
@@ -128,7 +125,6 @@ scheduleCanceled: '&a&oThe scheduled maintenance have been canceled!'
 
 scheduleLessThanOneMinute: '&5&oMaintenance in less than one minute!'
 
-
 #----------------------------------------------------# 
 #----------------------------------------------------# 
 
@@ -140,7 +136,6 @@ pluginDisabled: '&6&l<plugin> &a&osuccessfully disabled!'
 
 pluginEnabled: '&6&l<plugin> &a&osuccessfully enabled!'
 
-
 #----------------------------------------------------# 
 #----------------------------------------------------# 
 
@@ -151,7 +146,6 @@ pluginEnabled: '&6&l<plugin> &a&osuccessfully enabled!'
 backingUpMessage: '&e&oBacking up. The server will lag briefly.'
 
 backupSuccess: '&2&o&lBackup success!'
-
 
 #----------------------------------------------------# 
 #----------------------------------------------------# 
@@ -170,7 +164,6 @@ maintenanceAlreadyScheduled: '&cA maintenance is already scheduled.'
 
 alreadyBackingUp: '&cPlease wait the end of this backup before backing up again!'
 
-
 #----------------------------------------------------# 
 #----------------------------------------------------# 
 
@@ -185,7 +178,6 @@ inputErrorDuration: '&cThe time value for duration must be an integer!'
 pluginManagementArgumentErrorDisable: '&cPlease name the plugin you want to disable!'
 
 pluginManagementArgumentErrorEnable: '&cPlease name the plugin you want to enable!'
-
 
 #----------------------------------------------------# 
 #----------------------------------------------------#
