@@ -90,7 +90,7 @@ public abstract class MaintenanceUtils {
 		}
 	}
 
-	public static void backup(CommandSender sender) {
+	public static void backup(final CommandSender sender) {
 		if (backingUp == false) {
 			backingUp = true;
 			String folderPath = new File("").getAbsolutePath() + "/backups/";
@@ -109,12 +109,20 @@ public abstract class MaintenanceUtils {
 			MaintenanceManager.getInstance().getServer().dispatchCommand(MaintenanceManager.getInstance().getServer().getConsoleSender(), "save-all");
 			MaintenanceManager.getInstance().getServer().dispatchCommand(MaintenanceManager.getInstance().getServer().getConsoleSender(), "save-off");
 
-			backupProcess();
-			if(sender != null)
-				sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("backupSuccess").replaceAll("&", "§") );
+			Bukkit.getScheduler().runTaskAsynchronously(MaintenanceManager.getInstance(), new Runnable() {
 
-			MaintenanceManager.getInstance().getServer().dispatchCommand(MaintenanceManager.getInstance().getServer().getConsoleSender(), "save-on");
-			backingUp = false;
+				@Override
+				public void run() {
+					if(sender != null)
+						sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("backupSuccess").replaceAll("&", "§") );
+
+					MaintenanceManager.getInstance().getServer().dispatchCommand(MaintenanceManager.getInstance().getServer().getConsoleSender(), "save-on");
+					backingUp = false;
+				}
+				
+			});
+			backupProcess();
+
 		} else {
 			if(sender != null)
 				sender.sendMessage( MaintenanceManager.getInstance().getCustomConfig().getString("alreadyBackingUp").replaceAll("&", "§") );

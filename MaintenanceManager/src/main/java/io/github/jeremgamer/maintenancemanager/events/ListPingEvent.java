@@ -66,15 +66,15 @@ public class ListPingEvent implements Listener {
 			if (MaintenanceManager.getHandler().isDurationEnabled()) {
 				try {
 					if (MaintenanceManager.getHandler().getRemainingTime() / 60 < 1) {
-						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTDLessThanOneMinute").replaceAll("&", "§").replaceAll("<n>", "\n"));
+						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTDLessThanOneMinute").replaceAll("&", "§"));
 					} else {
-						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTD").replaceAll("&", "§").replaceAll("<n>", "\n").replaceAll("<minutes>", String.valueOf((int)(MaintenanceManager.getHandler().getRemainingTime() / 60))));
+						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTD").replaceAll("&", "§").replaceAll("<minutes>", String.valueOf((int)(MaintenanceManager.getHandler().getRemainingTime() / 60))));
 					}
 				} catch (NumberFormatException e){
 					MaintenanceManager.getInstance().getLogger().info(MaintenanceManager.getInstance().getCustomConfig().getString("inputErrorDuration").replaceAll("&", "§"));
 				}
 			} else {
-				event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceMOTD").replaceAll("&", "§").replaceAll("<n>", "\n") );
+				event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceMOTD").replaceAll("&", "§") );
 			}
 			try {
 				event.setServerIcon(maintenanceIcon); 

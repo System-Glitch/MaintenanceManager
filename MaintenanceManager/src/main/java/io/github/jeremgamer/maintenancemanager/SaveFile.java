@@ -84,7 +84,7 @@ public class SaveFile {
 		for (String line : content) {
 			if (line.startsWith(section)) {
 				if (value instanceof String) {
-					content.set(id , section + ": '" + value + "'");
+					content.set(id , section + ": '" + ((String) value).replaceAll("\n" , "<n>") + "'");
 					return;
 				} else {
 					content.set(id, section + ": " + value);
@@ -102,7 +102,7 @@ public class SaveFile {
 		for (String line : content) {
 			if (line.startsWith(section + ": '")) {
 				value = line.substring(section.length() + 3);
-				return value.substring(0, value.length()-1);
+				return value.substring(0, value.length()-1).replaceAll("<n>", "\n");
 			}
 		}
 		MaintenanceManager.getInstance().getLogger().warning("Invalid value in \"" + section + "\" config section.");
