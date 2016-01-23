@@ -2,7 +2,7 @@
 
 Maintenance Manager is the ultimate maintenance plugin which makes maintenances times on your server way easier! For the moment, it provides several exclusivities I havn't found anywhere else. It is very simple to use and to configure (even if the configuration is optionnal). I want to make it the best maintenance plugin for Bukkit!
 
-Current version: 2.1
+Current version: 2.2
 
 ---> [Download](https://app.box.com/s/mi19fcbpta2p19islpuo3qtewmzdvyh3) <---
 
