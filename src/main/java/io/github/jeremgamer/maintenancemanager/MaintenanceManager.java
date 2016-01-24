@@ -13,10 +13,8 @@ import io.github.jeremgamer.maintenancemanager.events.ListPingEvent;
 
 public class MaintenanceManager extends JavaPlugin {
 
-	//public static final String DOWNLOAD_ADDRESS = "https://raw.githubusercontent.com/JeremGamer/MaintenanceManager/master/release/MaintenanceManager-<version>.jar";
-	//private static final String RELEASE_MANIFEST = "https://raw.githubusercontent.com/JeremGamer/MaintenanceManager/master/RELEASE_MANIFEST.version";
-	public static final String DOWNLOAD_ADDRESS = "file:/home/david/Desktop/test/MaintenanceManager-<version>.jar";
-	private static final String RELEASE_MANIFEST = "file:/home/david/Desktop/test/RELEASE_MANIFEST.version";
+	public static final String DOWNLOAD_ADDRESS = "https://raw.githubusercontent.com/JeremGamer/MaintenanceManager/master/release/MaintenanceManager-<version>.jar";
+	private static final String RELEASE_MANIFEST = "https://raw.githubusercontent.com/JeremGamer/MaintenanceManager/master/RELEASE_MANIFEST.version";
 	private static MaintenanceManager instance;
 	private static Handler handler;
 	private static boolean upToDate;
