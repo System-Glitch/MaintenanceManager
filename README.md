@@ -199,8 +199,3 @@ To set up Maintenance Manager, simply download the jar file and put it into "plu
 #Feedback:
 
 Your opinion is important for me! Please write a comment below and let me know what you think, what you would like to see in the plugin or what you would like to change! Please report me any bug you have. :) I want to make the best maintenance plugin for Bukkit, and to do that, I need your feedback! Thank you for your time.
-Donate!
-
-If you really enjoy this plugin and you want to reward me for my work, please donate! I would be very grateful!
-
-<html><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=99FBSV9DP5JCL&amp;lc=US&amp;item_name=JEREMSPEED&amp;item_number=MaintenanceManager&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate" title="Donate"></a></html>
