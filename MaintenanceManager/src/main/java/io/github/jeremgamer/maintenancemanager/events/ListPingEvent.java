@@ -66,18 +66,20 @@ public class ListPingEvent implements Listener {
 			if (MaintenanceManager.getHandler().isDurationEnabled()) {
 				try {
 					if (MaintenanceManager.getHandler().getRemainingTime() / 60 < 1) {
-						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTDLessThanOneMinute").replaceAll("&", "ง"));
+						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTDLessThanOneMinute").replaceAll("&", "ยง"));
 					} else {
-						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTD").replaceAll("&", "ง").replaceAll("<minutes>", String.valueOf((int)(MaintenanceManager.getHandler().getRemainingTime() / 60))));
+						event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceWithDurationMOTD").replaceAll("&", "ยง").replaceAll("<minutes>", String.valueOf((int)(MaintenanceManager.getHandler().getRemainingTime() / 60))));
 					}
 				} catch (NumberFormatException e){
-					MaintenanceManager.getInstance().getLogger().info(MaintenanceManager.getInstance().getCustomConfig().getString("inputErrorDuration").replaceAll("&", "ง"));
+					MaintenanceManager.getInstance().getLogger().info(MaintenanceManager.getInstance().getCustomConfig().getString("inputErrorDuration").replaceAll("&", "ยง"));
 				}
 			} else {
-				event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceMOTD").replaceAll("&", "ง") );
+				event.setMotd( MaintenanceManager.getInstance().getCustomConfig().getString("maintenanceMOTD").replaceAll("&", "ยง") );
 			}
 			try {
-				event.setServerIcon(maintenanceIcon); 
+				if (maintenanceIcon != null) {
+					event.setServerIcon(maintenanceIcon);
+				}
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
